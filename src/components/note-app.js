@@ -96,29 +96,37 @@ class NoteApp extends HTMLElement {
   }
 
   async handleNoteClick(event) {
-    const target = event.target
+    const target = event.target;
     if (target.classList.contains('delete-btn')) {
-      const listItem = target.closest('.list-group-item')
-      const noteId = listItem.dataset.id
-      try {
-        const response = await fetch(
-          `https://notes-api.dicoding.dev/v2/notes/${noteId}`,
-          {
-            method: 'DELETE',
-          },
-        )
-        const data = await response.json()
-        console.log(data)
-        if (response.ok) {
-          listItem.remove()
-        } else {
-          console.error('Failed to delete note:', data.message)
+        const listItem = target.closest('.list-group-item');
+        const noteId = listItem.dataset.id;
+
+        // Tampilkan loading indicator
+        showCustomLoader();
+
+        try {
+            const response = await fetch(
+                `https://notes-api.dicoding.dev/v2/notes/${noteId}`,
+                {
+                    method: 'DELETE',
+                },
+            );
+            const data = await response.json();
+            console.log(data);
+            if (response.ok) {
+                listItem.remove();
+            } else {
+                console.error('Failed to delete note:', data.message);
+            }
+        } catch (error) {
+            console.error('Error deleting note:', error);
+        } finally {
+            // Sembunyikan loading indicator setelah permintaan selesai
+            hideCustomLoader();
         }
-      } catch (error) {
-        console.error('Error deleting note:', error)
-      }
     }
-  }
+}
+
 
   async retrieveNotes() {
     try {
