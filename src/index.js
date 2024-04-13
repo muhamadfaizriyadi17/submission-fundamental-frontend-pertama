@@ -1,0 +1,5 @@
+import './components/app-bar.js'
+import './components/note-app.js'
+import './components/loader.js'
+import './components/footer-bar.js'
+import './styles/style.css'

@@ -1,6 +1,6 @@
 class AppBar extends HTMLElement {
-    connectedCallback() {
-        this.innerHTML = `
+  connectedCallback() {
+    this.innerHTML = `
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
                 <div class="container">
                     <a class="navbar-brand" href="#">Notes App</a>
@@ -20,8 +20,8 @@ class AppBar extends HTMLElement {
                     </div>
                 </div>
             </nav>
-        `;
-    }
+        `
+  }
 }
 
-customElements.define('app-bar', AppBar);
+customElements.define('app-bar', AppBar)
